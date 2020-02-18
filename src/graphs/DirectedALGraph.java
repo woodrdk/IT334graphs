@@ -1,20 +1,28 @@
 package graphs;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DirectedALGraph<V> implements IGraph<V> {
 
     //fields
-    private Map<V, ?> adjacencyList;
-
+    private Map<V, Node> adjacencyList;
 
     public DirectedALGraph() {
-
+        adjacencyList= new HashMap<>();
     }
 
     @Override
     public boolean addVertex(V vertex) {
-        return false;
+        // precondition
+        if(adjacencyList.containsKey(vertex)){
+            return false; // not successful
+        }
+        else{
+            // insert new vertex
+            adjacencyList.put(vertex, null);
+            return true;
+        }
     }
 
     @Override
