@@ -3,10 +3,10 @@ package graphs;
 public interface IGraph<V> {
 
     // insertion into the graph
-    boolean addVertex(V vertex);
-    boolean addVertex(V... vertices);
-    boolean addEdge(V source, V destination, double weight);
-    boolean addEdges(/* TODO */);
+    void addVertex(V vertex);
+    void addVertex(V... vertices);
+    void addEdge(V source, V destination, double weight);
+    void addEdges(/* TODO */);
 
     // detext existing elements
     boolean hasVertex(V vertex);

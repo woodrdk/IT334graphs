@@ -13,36 +13,53 @@ public class DirectedALGraph<V> implements IGraph<V> {
     }
 
     @Override
-    public boolean addVertex(V vertex) {
+    public void addVertex(V vertex) {
         // precondition
         if(hasVertex(vertex)){
-            return false; // not successful
+            throw new IllegalArgumentException("Vertex is already in the graph");
         }
         else{
             // insert new vertex
             adjacencyList.put(vertex, null);
-            return true;
         }
     }
 
     @Override
-    public boolean addVertex(V... vertices) {
-        boolean successful = true;
+    public void addVertex(V... vertices) {
         for(V vertex: vertices){
-            successful =  addVertex(vertex) && successful;
+            addVertex(vertex);
         }
-        return successful;
     }
 
     @Override
-    public boolean addEdge(V source, V destination, double weight) {
-        
-        return false;
+    public void addEdge(V source, V destination, double weight) {
+        if(!hasVertex(source) || !hasVertex(destination)){ // make sure both vertices exist
+            throw new IllegalArgumentException("Source or destination does not exist in the group");
+        }
+        else if(source.equals(destination)){ // check for a self loop
+            throw new IllegalArgumentException("No self loops allowed");
+        }
+        else if(hasEdge(source, destination)){
+            throw new IllegalArgumentException("Edge already exists");
+        }
+
+        Node first = adjacencyList.get(source);
+        if(first == null ){ // the first incident edge
+            // put the edge in the map
+            adjacencyList.put(source, new Node(destination));
+        }
+        else{ // place the node at the start of the linked list
+            Node newNode = new Node(destination, first);
+            adjacencyList.put(source, newNode);
+
+             // or
+            // adjacencyList.put(source, new Node(destination, first));
+        }
     }
 
     @Override
-    public boolean addEdges() {
-        return false;
+    public void addEdges() {
+
     }
 
     @Override
@@ -83,6 +100,13 @@ public class DirectedALGraph<V> implements IGraph<V> {
     @Override
     public boolean updateEdgeWeight(V source, V destination, double newWeight) {
         return false;
+    }
+
+
+    public class edge{
+        private V source;
+        private V destination;
+        private double weight;
     }
 
     private class Node{
