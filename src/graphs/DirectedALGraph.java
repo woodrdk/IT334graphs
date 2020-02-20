@@ -15,7 +15,7 @@ public class DirectedALGraph<V> implements IGraph<V> {
     @Override
     public boolean addVertex(V vertex) {
         // precondition
-        if(adjacencyList.containsKey(vertex)){
+        if(hasVertex(vertex)){
             return false; // not successful
         }
         else{
@@ -27,11 +27,16 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public boolean addVertex(V... vertices) {
-        return false;
+        boolean successful = true;
+        for(V vertex: vertices){
+            successful =  addVertex(vertex) && successful;
+        }
+        return successful;
     }
 
     @Override
     public boolean addEdge(V source, V destination, double weight) {
+        
         return false;
     }
 
@@ -42,7 +47,7 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public boolean hasVertex(V vertex) {
-        return false;
+        return adjacencyList.containsKey(vertex);
     }
 
     @Override
@@ -52,7 +57,7 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public int vertexSize() {
-        return 0;
+        return adjacencyList.size();
     }
 
     @Override
