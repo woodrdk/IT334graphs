@@ -6,7 +6,7 @@ public interface IGraph<V> {
     void addVertex(V vertex);
     void addVertex(V... vertices);
     void addEdge(V source, V destination, double weight);
-    void addEdges(/* TODO */);
+    void addEdges(DirectedALGraph.Edge<V>... edges);
 
     // detext existing elements
     boolean hasVertex(V vertex);

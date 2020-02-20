@@ -58,8 +58,10 @@ public class DirectedALGraph<V> implements IGraph<V> {
     }
 
     @Override
-    public void addEdges() {
-
+    public void addEdges(Edge<V>... edges) {
+        for(Edge<V> edge : edges){
+            addEdge(edge.source, edge.destination, edge.weight);
+        }
     }
 
     @Override
@@ -103,10 +105,40 @@ public class DirectedALGraph<V> implements IGraph<V> {
     }
 
 
-    public class edge{
+    public static class Edge<V>{
         private V source;
         private V destination;
         private double weight;
+
+        public Edge(V source, V destination, double weight) {
+            this.source = source;
+            this.destination = destination;
+            this.weight = weight;
+        }
+
+        public V getSource() {
+            return source;
+        }
+
+        public void setSource(V source) {
+            this.source = source;
+        }
+
+        public V getDestination() {
+            return destination;
+        }
+
+        public void setDestination(V destination) {
+            this.destination = destination;
+        }
+
+        public double getWeight() {
+            return weight;
+        }
+
+        public void setWeight(double weight) {
+            this.weight = weight;
+        }
     }
 
     private class Node{
