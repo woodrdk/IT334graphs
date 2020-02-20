@@ -71,7 +71,18 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public boolean hasEdge(V source, V destination) {
-        return false;
+        Node first = adjacencyList.get(source);
+
+        if (first == null){
+            return false;
+        }
+        else{
+            while(first != null && !first.vertex.equals(destination)){
+                first = first.next;
+            }
+        }
+
+        return first != null && first.vertex.equals(destination);
     }
 
     @Override
@@ -81,7 +92,7 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public int edgeSize() {
-        return 0;
+        return edgeCount;
     }
 
     @Override
