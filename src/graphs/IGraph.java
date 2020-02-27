@@ -1,5 +1,9 @@
 package graphs;
 
+import javax.crypto.spec.PSource;
+import javax.xml.transform.Source;
+import java.util.List;
+
 public interface IGraph<V> {
 
     // insertion into the graph
@@ -23,4 +27,7 @@ public interface IGraph<V> {
     // interesting methods
     boolean areAdjacent(V first, V second);
     boolean updateEdgeWeight(V source, V destination, double newWeight);
+
+    // famous operations
+    List<V> dfs(V source);
 }

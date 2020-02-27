@@ -1,13 +1,53 @@
 package graphs;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.w3c.dom.Node;
+
+import java.util.*;
 
 public class DirectedALGraph<V> implements IGraph<V> {
 
     //fields
     private Map<V, Node> adjacencyList;
 
+    public List<V> dfs(V source)
+    {
+        if(!hasVertex(source)){
+            throw new IllegalArgumentException("Source vertex does not exist");
+        }
+        // create some helper data structures
+        List<V> results = new ArrayList<>();
+        Set<V> seen = new HashSet<>();
+
+        dfs(source,results, seen);
+        return results;
+    }
+    // this method wil be called when we want to visit a new vertex (called current)
+    private void dfs(V current, List<V> results, Set<V> seen) {
+        // check first that I have not seen this vertex
+        if (!seen.contains(current)) {
+            results.add(current);
+            seen.add(current);
+
+            // check adjacent vertices
+            Node list = adjacencyList.get(current);
+            while (list != null) {
+                // check the adjacent vertex
+                dfs(list.vertex, results, seen);
+                // move to the next
+                list = list.next;
+            }
+        }
+
+    }
+    public List<V> dfsOverComponents(){
+        // create some helper data structures
+        List<V> results = new ArrayList<>();
+        Set<V> seen = new HashSet<>();
+        for(V vertex: adjacencyList.keySet()){
+            dfs(vertex, results, seen);
+        }
+        return results;
+    }
     public DirectedALGraph() {
         adjacencyList= new HashMap<>();
     }
@@ -92,7 +132,7 @@ public class DirectedALGraph<V> implements IGraph<V> {
 
     @Override
     public int edgeSize() {
-        return edgeCount;
+        return 0;
     }
 
     @Override
