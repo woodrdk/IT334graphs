@@ -47,5 +47,11 @@ public class testGraphs {
         for(char character : dfs){
             System.out.println(character);
         }
+
+        // test dfs() and see if it works
+        List<Character> dfs2 = letterGraph.dfsOverComponents();
+        for(char character : dfs2){
+            System.out.println(character);
+        }
     }
 }

@@ -30,4 +30,5 @@ public interface IGraph<V> {
 
     // famous operations
     List<V> dfs(V source);
+    List<V> dfsOverComponents();
 }
